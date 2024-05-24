@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Delete Section
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center font-weight-bold" style="font-size: 72px;">Delete Section</h5>
+                    <p class="card-text text-center text-danger" style="font-size: 24px;">Confirm to delete <b>{{ section.sec_name }}</b></p>
+                    <form action="" method="post">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash mr-1"></i>
+                                Delete
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

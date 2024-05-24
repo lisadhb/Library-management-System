@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    My Books
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">My Books</h1>
+        {% if books %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Access Date</th>
+                        <th scope="col">Expiration Date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{ book.books.b_name }}</td>
+                            <td>{{ book.access_date }}</td>
+                            <td>{{ book.expiration_date }}</td>
+                            <td>
+                                <a href="{{ url_for('view_content', book_id=book.book_id) }}" class="btn btn-primary">Read</a>
+                                <a href="{{ url_for('return_book', book_id=book.book_id) }}" class="btn btn-danger">Return</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No books found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

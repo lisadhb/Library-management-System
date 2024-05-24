@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Edit Book
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5 mb-4 text-center">Edit Book</h1>
+    <div class="d-flex justify-content-center">
+    <form action="{{url_for('edit_book_post',book_id=book.book_id)}}" class="form" method="post">
+        <div class="form-group">
+            <label for="name" class="form-label mt-2">Book Name:</label>
+            <input type="text" name="name" value="{{book.b_name}}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="des" class="form-label mt-2">Book Content:</label>
+            <input type="text" name="des" value="{{book.b_content}}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="author" class="form-label mt-2">Book Author:</label>
+            <input type="text" name="author" value="{{book.auth_name}}" class="form-control" required>
+        </div>
+        <div class="for-group">
+            <label for="sec_id" class="form-label mt-2">Section:</label>
+            <select name="sec_id" id="sec_id" class="form-control" required>
+                {% for sec in sections %}
+                {% if sec.sec_id==book.sec_id %}
+                    <option selected value="{{sec.sec_id}}">{{sec.sec_name}}</option>
+                {% else %}
+                    <option value="{{sec.sec_id}}">{{sec.sec_name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        <div class="form-group">
+            <button type="submit" class="btn btn-dark mt-2">
+                <i class="fas fa-plus"></i>
+                Update
+            </button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

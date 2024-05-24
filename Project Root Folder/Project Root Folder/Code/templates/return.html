@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <form action="{{url_for('return_book',book_id=book.book_id)}}" method="post" class="form">
+        <h1 class="display-1">Return {{book.b_name}}</h1>
+        <button class="btn btn-success">Confirm Return</button>
+    </form>
+{% endblock %}

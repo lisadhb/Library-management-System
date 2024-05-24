@@ -1,0 +1,107 @@
+{% include 'layout.html' %}
+
+{% block title %}
+    <h1 class="h1-display text-center">Admin Profile</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Welcome, {{ user.username }}!</h3>
+                    <p class="card-text text-center">Here's some information:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Number of Sections</h5>
+                                    <p class="card-text text-center" style="font-size:24px">{{ num_sections }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Number of Books</h5>
+                                    <p class="card-text text-center" style="font-size:24px">{{ num_books }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Books Distribution</h5>
+                                    <div class="text-center">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Number of Requested Books</h5>
+                                    <p class="card-text text-center" style="font-size:24px">{{ requested_books }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Number of Issued Books</h5>
+                                    <p class="card-text text-center" style="font-size:24px">{{ issued_books }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="{{ url_for('logout') }}" class="btn btn-dark btn-block mt-4">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block style %}
+    
+{% endblock %}
+{% block script %}
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{section_names|safe}},
+        datasets: [{
+          label: '# of Books',
+          data: {{section_sizes|safe}},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
+{% endblock %}

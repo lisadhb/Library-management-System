@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Manage Requests
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">Manage Requests</h1>
+        {% if requests %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Book</th>
+                        <th scope="col">Requested Date</th>
+                        <th scope="col">Return Date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in requests %}
+                        <tr>
+                            <td>{{ request.user.name }}</td>
+                            <td>{{ request.books.b_name }}</td>
+                            <td>{{ request.request_date }}</td>
+                            <td>{{ request.return_date }}</td>
+                            <td>
+                                <form action="{{ url_for('accept_request') }}" method="post" style="display: inline;">
+                                    <input type="hidden" name="request_id" value="{{ request.request_id }}">
+                                    <button type="submit" class="btn btn-success">Issue</button>
+                                </form>                                
+                                <form action="{{ url_for('decline_request') }}" method="post" style="display: inline;">
+                                    <input type="hidden" name="request_id" value="{{ request.request_id }}">
+                                    <button type="submit" class="btn btn-danger">Decline</button>
+                                </form>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No requests found.</p>
+        {% endif %}
+    </div>
+{% endblock %}
