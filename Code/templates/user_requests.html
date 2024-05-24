@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    My Requests
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4 h1-display">My Requests</h1>
+        {% if requests %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Section Name</th>
+                        <th scope="col">Requested Date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in requests %}
+                        <tr>
+                            <td>{{ request.books.b_name }}</td>
+                            <td>{{ request.books.section.sec_name }}</td>
+                            <td>{{ request.request_date }}</td>
+                            <td>
+                                <form action="{{ url_for('cancel_request', request_id=request.request_id) }}" method="post">
+                                    <input type="hidden" name="request_id" value="{{ request.request_id }}">
+                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="h3-display">No Requests found!</p>
+        {% endif %}
+    </div>
+{% endblock %}

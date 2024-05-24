@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Books of {{ section.sec_name }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5 mb-4">{{ section.sec_name }} Books</h1>
+    <a href="{{ url_for('add_book', sec_id=section.sec_id) }}" class="btn btn-dark mb-4">
+        <i class="fas fa-plus"></i>
+        Add Book
+    </a>
+
+    <h2>Books:</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Author Name</th>
+                    <th scope="col">Issue Date</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in section.books %}
+                <tr>
+                    <td>{{ book.book_id }}</td>
+                    <td>{{ book.b_name }}</td>
+                    <td>{{ book.auth_name }}</td>
+                    <td>{{ book.issue_date }}</td>
+                    <td>{{ book.return_date }}</td>
+                    <td>
+                        <a href="{{ url_for('view_book', book_id=book.book_id) }}" class="btn btn-success btn-sm">
+                            <i class="fas fa-eye"></i> View
+                        </a>
+                        <a href="{{ url_for('edit_book', book_id=book.book_id) }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a href="{{ url_for('delete_book', book_id=book.book_id) }}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

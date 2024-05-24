@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Manage Issues
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">Manage Issued books</h1>
+        {% if accepted_books %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Access Date</th>
+                        <th scope="col">Expiration Date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for access in accepted_books %}
+                        <tr>
+                            <td>{{ access.user.name }}</td>
+                            <td>{{ access.books.b_name }}</td>
+                            <td>{{ access.access_date }}</td>
+                            <td>{{ access.expiration_date }}</td>
+                            <td>
+                                <form action="{{url_for('revoke_book', book_id=access.book_id)}}" method="post" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">Revoke</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No issued books found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

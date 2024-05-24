@@ -1,0 +1,24 @@
+<div class="container-fluid mt-3 d-flex">
+    <div class="row w-100">
+        <div class="search-bar">
+            <form action="">
+                <div class="input-group">
+                    <input type="text" name="sname" id="sname" value="{{ sname }}" placeholder="Section name" class="form-control">
+                        <span class="input-group-text" style="margin-right: 5px;"><i class="fas fa-filter"></i></span>
+                    <input type="text" name="bname" id="bname" value="{{ bname }}" placeholder="Book name" class="form-control">
+                        <span class="input-group-text" style="margin-right: 5px;"><i class="fas fa-filter"></i></span>
+                    <input type="text" name="auth_name" id="auth_name" value="{{ auth_name }}" placeholder="Author name" class="form-control">
+                        <span class="input-group-text" style="margin-right: 5px;"><i class="fas fa-filter"></i></span>
+                    <a href="{{url_for('index')}}" class="btn btn-outline-danger" style="margin-right: 5px;">
+                        <i class="fa-solid fa-broom"></i>
+                        Clear
+                    </a>
+                    <button class="btn btn-outline-primary">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Filter Search
+                    </button> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

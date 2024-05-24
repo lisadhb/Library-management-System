@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+    {% include 'searchbar.html' with context %}
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="sections-list">
+                    {% for section in sections %}
+                        <h2>{{ section.sec_name }}</h2>
+                        <div class="row">
+                            {% for book in section.books %}
+                                {% if not bname or bname.lower() in book.b_name.lower() %}
+                                    {% if not auth_name or auth_name.lower() in book.auth_name.lower() %}
+                                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ book.b_name }}</h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted">{{ book.auth_name }}</h6>
+                                                    <a href="{{ url_for('request_book', book_id=book.book_id) }}" class="btn btn-success btn-sm">Request</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .card {
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+    </style>
+{% endblock %}

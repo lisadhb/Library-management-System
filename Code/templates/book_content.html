@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ book.b_name }} - Content
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">{{ book.b_name }}</h1>
+        <p>{{ book.b_content }}</p>
+    </div>
+{% endblock %}
